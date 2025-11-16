@@ -5,7 +5,7 @@ import paho.mqtt.client as mqtt
 import json
 from datetime import datetime, timezone
 import RPi.GPIO as GPIO
-from sensors.lid import detect_lid_open
+from sensors.lid import detect_lid_events
 from actuators.alerts import alert_start, alert_stop
 
 BROKER = "localhost"
@@ -49,7 +49,10 @@ mqtt_client.connect(BROKER, PORT, keepalive=60)
 mqtt_client.loop_start()
 
 try:
-    detect_lid_open(lambda: send_event("lid_opened"))
+    detect_lid_events(
+        lambda: send_event("lid_opened"), 
+        lambda: send_event("lid_closed") 
+    )
 except KeyboardInterrupt:
     print("Stopping...")
 finally:
