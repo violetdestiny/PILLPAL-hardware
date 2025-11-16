@@ -1,12 +1,13 @@
 import RPi.GPIO as GPIO
 import time
 
-LID_PIN = 17
+LID_PIN = 23 
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(LID_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 def is_lid_open():
+  
     return GPIO.input(LID_PIN) == GPIO.LOW
 
 def detect_lid_open(callback):
