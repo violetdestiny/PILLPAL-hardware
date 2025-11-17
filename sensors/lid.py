@@ -7,7 +7,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(LID_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 def lid_is_open():
-    return GPIO.input(LID_PIN) == GPIO.LOW
+    return GPIO.input(LID_PIN) == GPIO.HIGH
 
 def detect_lid_events(on_open, on_close):
     last_state = lid_is_open()

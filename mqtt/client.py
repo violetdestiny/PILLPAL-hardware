@@ -38,7 +38,7 @@ def on_message(client, userdata, msg):
     print(f"[CMD] {cmd}")
 
     if cmd == "ALERT_START":
-        alert_start(sound=True, vibration=True)
+        alert_start()
     elif cmd == "ALERT_STOP":
         alert_stop()
 
