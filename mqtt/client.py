@@ -18,14 +18,12 @@ DEVICE_ID = "1"
 TOPIC_EVENTS = "pillpal/device/events"
 TOPIC_COMMANDS = "pillpal/device/commands"
 
-
-API_URL = "http://18.200.194.71:5000/api/events"
-
+API_URL = "https://pillpal.space/api/events"
 
 mqtt_client = mqtt.Client(client_id=DEVICE_ID)
 
-def send_event(event_type):
 
+def send_event(event_type):
     payload = {
         "device_id": DEVICE_ID,
         "event_type": event_type,
@@ -35,7 +33,6 @@ def send_event(event_type):
 
     mqtt_client.publish(TOPIC_EVENTS, json.dumps(payload), qos=1)
     print(f"[MQTT] Published {payload}")
-
 
     try:
         res = requests.post(
@@ -84,4 +81,3 @@ except KeyboardInterrupt:
 finally:
     mqtt_client.loop_stop()
     GPIO.cleanup()
-
