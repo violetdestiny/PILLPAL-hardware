@@ -1,3 +1,4 @@
+# actuators/alerts.py
 import RPi.GPIO as GPIO
 import time
 import threading
@@ -141,3 +142,26 @@ def cleanup():
     #     motor_pwm.stop()
 
     GPIO.cleanup()
+    print("[ALERT] Cleanup completed with MQTT events")
+
+# Test function
+if __name__ == "__main__":
+    try:
+        print("Testing alerts with MQTT database integration...")
+        alert_test()
+        time.sleep(1)
+        
+        print("Testing standard alert...")
+        alert_start("standard")
+        time.sleep(3)
+        alert_stop()
+        
+        time.sleep(1)
+        
+        print("Testing melody alert...")
+        alert_start("melody")
+        time.sleep(2)
+        alert_stop()
+        
+    finally:
+        cleanup()
